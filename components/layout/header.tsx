@@ -111,7 +111,7 @@ export function Header() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-2 top-3 h-4 w-4 text-muted-foreground" />
           </form>
 
           <Button
@@ -136,7 +136,7 @@ export function Header() {
             <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           </Button>
-          
+
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -155,13 +155,13 @@ export function Header() {
                   />
                   <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 </form>
-                
+
                 <div className="space-y-4">
                   <h4 className="font-medium">Categories</h4>
                   <div className="flex flex-col space-y-2">
                     {categories.map(category => (
-                      <Link 
-                        key={category.slug} 
+                      <Link
+                        key={category.slug}
                         href={`/category/${category.slug}`}
                         className="text-sm hover:text-primary"
                       >
@@ -170,7 +170,7 @@ export function Header() {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <Link href="/about" className="text-sm hover:text-primary">
                     About
