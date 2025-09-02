@@ -91,8 +91,9 @@ export function Markdown({ content, className }: MarkdownProps) {
       const match = /language-(\w+)/.exec(className || "");
 
       return !inline && match ? (
+        // @ts-expect-error Theme typing mismatch
         <SyntaxHighlighter
-          style={codeTheme as { [key: string]: React.CSSProperties }}
+          style={codeTheme}
           language={match[1]}
           PreTag="div"
           className="rounded-md my-6 overflow-hidden"
@@ -100,6 +101,7 @@ export function Markdown({ content, className }: MarkdownProps) {
         >
           {String(children).replace(/\n$/, "")}
         </SyntaxHighlighter>
+
 
 
       ) : (
