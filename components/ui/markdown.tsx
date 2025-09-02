@@ -7,11 +7,19 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord as codeTheme } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/lib/utils";
 import type { Components } from "react-markdown";
-import type { CodeComponent } from "react-markdown/lib/ast-to-react";
 
 interface MarkdownProps {
   content: string;
   className?: string;
+}
+
+// 👇 Local type for code blocks
+interface CodeProps {
+  node?: unknown;
+  inline?: boolean;
+  className?: string;
+  children: React.ReactNode;
+  [key: string]: any;
 }
 
 export function Markdown({ content, className }: MarkdownProps) {
@@ -75,8 +83,7 @@ export function Markdown({ content, className }: MarkdownProps) {
         />
       </div>
     ),
-    // ✅ FIXED typing for code component
-    code: (({ node, inline, className, children, ...props }) => {
+    code: ({ inline, className, children, ...props }: CodeProps) => {
       const match = /language-(\w+)/.exec(className || "");
 
       return !inline && match ? (
@@ -90,23 +97,17 @@ export function Markdown({ content, className }: MarkdownProps) {
           {String(children).replace(/\n$/, "")}
         </SyntaxHighlighter>
       ) : (
-        <code
-          className="bg-muted px-1 py-0.5 rounded text-sm"
-          {...props}
-        >
+        <code className="bg-muted px-1 py-0.5 rounded text-sm" {...props}>
           {children}
         </code>
       );
-    }) as CodeComponent,
+    },
     hr: ({ node, ...props }) => (
       <hr className="my-8 border-border" {...props} />
     ),
     table: ({ node, ...props }) => (
       <div className="overflow-x-auto my-6">
-        <table
-          className="w-full border-collapse text-sm"
-          {...props}
-        />
+        <table className="w-full border-collapse text-sm" {...props} />
       </div>
     ),
     th: ({ node, ...props }) => (
