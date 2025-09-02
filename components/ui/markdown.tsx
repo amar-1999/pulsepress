@@ -7,7 +7,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { nord as codeTheme } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/lib/utils";
 import type { Components } from "react-markdown";
+import type { CSSProperties } from "react";
 
+const syntaxTheme = codeTheme as { [key: string]: CSSProperties };
 interface MarkdownProps {
   content: string;
   className?: string;
@@ -21,7 +23,7 @@ type CodeProps = {
   children?: React.ReactNode; // <- made optional
 } & React.HTMLAttributes<HTMLElement>;
 
-const syntaxTheme = codeTheme as Record<string, React.CSSProperties>;
+
 
 
 export function Markdown({ content, className }: MarkdownProps) {
@@ -90,7 +92,7 @@ export function Markdown({ content, className }: MarkdownProps) {
 
       return !inline && match ? (
         <SyntaxHighlighter
-          style={syntaxTheme}
+          style={codeTheme as { [key: string]: React.CSSProperties }}
           language={match[1]}
           PreTag="div"
           className="rounded-md my-6 overflow-hidden"
@@ -98,6 +100,7 @@ export function Markdown({ content, className }: MarkdownProps) {
         >
           {String(children).replace(/\n$/, "")}
         </SyntaxHighlighter>
+
 
       ) : (
         <code className="bg-muted px-1 py-0.5 rounded text-sm" {...props}>
