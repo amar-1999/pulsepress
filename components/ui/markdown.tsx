@@ -23,9 +23,6 @@ type CodeProps = {
   children?: React.ReactNode; // <- made optional
 } & React.HTMLAttributes<HTMLElement>;
 
-
-
-
 export function Markdown({ content, className }: MarkdownProps) {
   const components: Components = {
     h1: ({ node, ...props }) => (
@@ -87,7 +84,7 @@ export function Markdown({ content, className }: MarkdownProps) {
         />
       </div>
     ),
-    code: ({ inline, className, children, ...props }: CodeProps) => {
+    code: ({ inline, className, children }: CodeProps) => {
       const match = /language-(\w+)/.exec(className || "");
 
       return !inline && match ? (
@@ -96,17 +93,15 @@ export function Markdown({ content, className }: MarkdownProps) {
           language={match[1]}
           PreTag="div"
           className="rounded-md my-6 overflow-hidden"
-          {...props}
         >
           {String(children).replace(/\n$/, "")}
         </SyntaxHighlighter>
       ) : (
-        <code className="bg-muted px-1 py-0.5 rounded text-sm" {...props}>
+        <code className="bg-muted px-1 py-0.5 rounded text-sm">
           {children}
         </code>
       );
     },
-
     hr: ({ node, ...props }) => (
       <hr className="my-8 border-border" {...props} />
     ),
