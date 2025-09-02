@@ -6,13 +6,13 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 
 // Font setup
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-sans',
 });
 
-const merriweather = Merriweather({ 
+const merriweather = Merriweather({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '700', '900'],
@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     default: 'PulsePress - Modern News & Blog Platform',
   },
   description: 'A modern blog and news platform delivering the latest insights and stories.',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.png',
+    apple: '/apple-touch-icon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -47,6 +52,7 @@ export const metadata: Metadata = {
     images: ['https://pulsepress.com/twitter-image.png'],
   },
 };
+
 
 export default function RootLayout({
   children,
