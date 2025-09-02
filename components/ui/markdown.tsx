@@ -13,14 +13,13 @@ interface MarkdownProps {
   className?: string;
 }
 
-// 👇 Local type for code blocks
-interface CodeProps {
+// 👇 match react-markdown’s code component shape
+type CodeProps = {
   node?: unknown;
   inline?: boolean;
   className?: string;
-  children: React.ReactNode;
-  [key: string]: any;
-}
+  children?: React.ReactNode; // <- made optional
+} & React.HTMLAttributes<HTMLElement>;
 
 export function Markdown({ content, className }: MarkdownProps) {
   const components: Components = {
